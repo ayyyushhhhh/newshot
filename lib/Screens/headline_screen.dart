@@ -61,20 +61,21 @@ class _HeadlineScreenState extends State<HeadlineScreen> {
                   if (snapshot.hasData) {
                     List<NewsModel> newsData = snapshot.data as List<NewsModel>;
                     return SliverList(
-                        delegate: SliverChildBuilderDelegate((context, index) {
+                        delegate: SliverChildBuilderDelegate(
+                            childCount: newsData.length, (context, index) {
                       return NewsContainer(newsModel: newsData[index]);
                     }));
                   }
                   return const SliverToBoxAdapter(
                     child: Center(
-                      child: Text("No Data"),
+                      child: Text("No Internet Connection!"),
                     ),
                   );
                 }
 
                 return const SliverToBoxAdapter(
                   child: Center(
-                    child: Text("No Internet Connection!"),
+                    child: Text("No Data"),
                   ),
                 );
               },

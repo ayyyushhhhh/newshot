@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:newsapp/models/Providers/bookmark_provider.dart';
 import 'package:newsapp/models/news_model.dart';
+import 'package:provider/provider.dart';
 
 class NewsContainer extends StatelessWidget {
   final NewsModel newsModel;
@@ -57,7 +59,7 @@ class NewsContainer extends StatelessWidget {
                   height: 10.h,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
@@ -67,7 +69,26 @@ class NewsContainer extends StatelessWidget {
                         ),
                       ),
                       style: TextStyle(fontSize: 12.sp, color: Colors.blue),
-                    )
+                    ),
+                    Consumer<BookMarkProvider>(builder:
+                        (BuildContext context, bookmarks, Widget? child) {
+                      if (bookmarks.bookMarks.contains(newsModel)) {
+                        return IconButton(
+                            onPressed: () {
+                              bookmarks.removeBookMark(newsModel);
+                            },
+                            icon: const Icon(
+                              Icons.bookmark,
+                              color: Colors.blueAccent,
+                            ));
+                      } else {
+                        return IconButton(
+                            onPressed: () {
+                              bookmarks.addBookMark(newsModel);
+                            },
+                            icon: const Icon(Icons.bookmark));
+                      }
+                    }),
                   ],
                 )
               ],
