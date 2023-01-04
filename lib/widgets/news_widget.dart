@@ -10,11 +10,11 @@ class NewsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: EdgeInsets.all(10.r),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(10.r),
         boxShadow: const [
           BoxShadow(
             color: Colors.grey,
@@ -26,15 +26,16 @@ class NewsContainer extends StatelessWidget {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r)),
             child: Image.network(
               newsModel.urlToImage.toString(),
             ),
           ),
           const SizedBox(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.r),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,16 +45,16 @@ class NewsContainer extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   newsModel.description.toString(),
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
