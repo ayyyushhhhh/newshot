@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsapp/utils/dio_helper.dart';
+import 'package:newsapp/utils/API%20helper/dio_helper.dart';
+import 'package:newsapp/utils/API%20helper/error_handler.dart';
 import 'package:newsapp/widgets/drawer_container.dart';
 import 'package:newsapp/widgets/news_widget.dart';
 import '../models/news_model.dart';
@@ -12,7 +14,8 @@ class HeadlineScreen extends StatefulWidget {
   State<HeadlineScreen> createState() => _HeadlineScreenState();
 }
 
-class _HeadlineScreenState extends State<HeadlineScreen> {
+class _HeadlineScreenState extends State<HeadlineScreen>
+    with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
@@ -22,6 +25,7 @@ class _HeadlineScreenState extends State<HeadlineScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SafeArea(
       child: Scaffold(
         key: _scaffoldkey,
@@ -32,6 +36,7 @@ class _HeadlineScreenState extends State<HeadlineScreen> {
             SliverAppBar(
               backgroundColor: Theme.of(context).primaryColor,
               centerTitle: true,
+              pinned: true,
               title: Text(
                 "NewsShot",
                 style: TextStyle(fontSize: 40.sp, color: Colors.blueAccent),
@@ -48,7 +53,7 @@ class _HeadlineScreenState extends State<HeadlineScreen> {
               ),
             ),
             FutureBuilder<List<NewsModel>>(
-              future: DioHelper().fetchHeadlines(),
+              future: APIHelper().fetchHeadlines(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const SliverToBoxAdapter(
@@ -58,6 +63,11 @@ class _HeadlineScreenState extends State<HeadlineScreen> {
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    final error = snapshot.error as DioError;
+                    APIErrorHandler.fromDioError(error);
+                    print(APIErrorHandler.message);
+                  }
                   if (snapshot.hasData) {
                     List<NewsModel> newsData = snapshot.data as List<NewsModel>;
                     return SliverList(
@@ -85,4 +95,7 @@ class _HeadlineScreenState extends State<HeadlineScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

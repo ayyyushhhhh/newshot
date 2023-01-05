@@ -10,8 +10,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final PageController controller = PageController();
   int _currentIndex = 0;
-  final List _screens = [const HeadlineScreen(), const BookmarkScreen()];
+  final List<Widget> _screens = [
+    const HeadlineScreen(),
+    const BookmarkScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +23,14 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blueAccent,
-        onTap: (value) {
+        onTap: (index) {
           setState(() {
-            _currentIndex = value;
+            controller.jumpToPage(index);
+
+            /// Switching the PageView tabs
+            setState(() {
+              _currentIndex = index;
+            });
           });
         },
         items: const [
@@ -35,7 +44,15 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _screens[_currentIndex],
+      body: PageView(
+        controller: controller,
+        children: _screens,
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }
