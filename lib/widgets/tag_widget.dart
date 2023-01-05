@@ -8,11 +8,12 @@ class TagWidget extends StatelessWidget {
 
   const TagWidget({super.key, required this.tag});
 
-  Color _getColor({required String filterStr, required String buttonText}) {
+  Color _getColor(BuildContext context,
+      {required String filterStr, required String buttonText}) {
     if (filterStr == buttonText) {
       return Colors.blueAccent;
     }
-    return Colors.lightBlueAccent;
+    return Theme.of(context).primaryColor;
   }
 
   @override
@@ -27,7 +28,8 @@ class TagWidget extends StatelessWidget {
             height: 40.h,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: _getColor(filterStr: value.filter, buttonText: tag),
+              color:
+                  _getColor(context, filterStr: value.filter, buttonText: tag),
               border: Border.all(
                 color: Colors.blueAccent,
               ),
@@ -36,7 +38,9 @@ class TagWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 tag.toUpperCase(),
-                style: TextStyle(fontSize: 12.sp, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
               ),
             ),
           ),

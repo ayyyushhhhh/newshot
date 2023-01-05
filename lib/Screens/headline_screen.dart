@@ -1,14 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Screens/search_screen.dart';
-import 'package:newsapp/utils/API%20helper/api_helper.dart';
-import 'package:newsapp/utils/API%20helper/error_handler.dart';
+import 'package:newsapp/models/Providers/filter_provider.dart';
 import 'package:newsapp/widgets/bottom_modal.dart';
 import 'package:newsapp/widgets/drawer_container.dart';
-import 'package:newsapp/widgets/news_widget.dart';
-
-import '../models/news_model.dart';
+import 'package:newsapp/widgets/all_news_future_widget.dart';
+import 'package:newsapp/widgets/fiter_news_future_builder.dart';
+import 'package:provider/provider.dart';
 
 class HeadlineScreen extends StatefulWidget {
   const HeadlineScreen({super.key});
@@ -20,11 +18,6 @@ class HeadlineScreen extends StatefulWidget {
 class _HeadlineScreenState extends State<HeadlineScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,49 +77,12 @@ class _HeadlineScreenState extends State<HeadlineScreen>
                 ),
               ),
             ),
-            FutureBuilder<List<NewsModel>>(
-              future: APIHelper().fetchHeadlines(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SliverToBoxAdapter(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
+            Consumer<FilterProvider>(
+              builder: (BuildContext context, value, Widget? child) {
+                if (value.filter == "") {
+                  return const AllNewsFutureBuilder();
                 }
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    final error = snapshot.error as DioError;
-                    APIErrorHandler.fromDioError(error);
-                    SnackBar(
-                      content: Text(APIErrorHandler.message.toString()),
-                    );
-                    return const SliverToBoxAdapter(
-                      child: Center(
-                        child: Text("Something Went Wrong"),
-                      ),
-                    );
-                  }
-                  if (snapshot.hasData) {
-                    List<NewsModel> newsData = snapshot.data as List<NewsModel>;
-                    return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                            childCount: newsData.length, (context, index) {
-                      return NewsContainer(newsModel: newsData[index]);
-                    }));
-                  }
-                  return const SliverToBoxAdapter(
-                    child: Center(
-                      child: Text("No Internet Connection!"),
-                    ),
-                  );
-                }
-
-                return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Text("No Data"),
-                  ),
-                );
+                return FilterNewsFutureBuilder(filter: value.filter);
               },
             ),
           ],
