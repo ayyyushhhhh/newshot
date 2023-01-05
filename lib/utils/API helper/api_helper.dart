@@ -32,4 +32,33 @@ class APIHelper {
       rethrow;
     }
   }
+
+  Future<List<NewsModel>> fetchQueryNews({required String query}) async {
+    try {
+      Response response = await _dio.get(
+        AppConstants.searchNews(keyword: query),
+      );
+      if (response.statusCode == 200) {
+        final data = response.data["articles"] as List;
+
+        List<NewsModel> news = [];
+
+        for (var newsData in data) {
+          NewsModel newsModel = NewsModel.fromMap(newsData);
+          if (newsModel.author != null &&
+              newsModel.content != null &&
+              newsModel.description != null &&
+              newsModel.title != null &&
+              newsModel.urlToImage != null) {
+            news.add(newsModel);
+          }
+        }
+        return news;
+      }
+
+      return [];
+    } on DioError {
+      rethrow;
+    }
+  }
 }

@@ -44,6 +44,7 @@ class NewsContainer extends StatelessWidget {
                   topRight: Radius.circular(10.r)),
               child: Image.network(
                 newsModel.urlToImage.toString(),
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(),

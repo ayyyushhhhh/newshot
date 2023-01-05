@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:newsapp/Screens/search_screen.dart';
 import 'package:newsapp/utils/API%20helper/api_helper.dart';
 import 'package:newsapp/utils/API%20helper/error_handler.dart';
 import 'package:newsapp/widgets/drawer_container.dart';
@@ -37,6 +38,19 @@ class _HeadlineScreenState extends State<HeadlineScreen>
               backgroundColor: Theme.of(context).primaryColor,
               centerTitle: true,
               pinned: true,
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return const SearchScreen();
+                      }));
+                    },
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.blueAccent,
+                    )),
+              ],
               title: Text(
                 "NewsShot",
                 style: TextStyle(fontSize: 40.sp, color: Colors.blueAccent),
