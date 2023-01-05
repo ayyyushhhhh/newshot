@@ -9,6 +9,7 @@ class APIHelper {
       Response response = await _dio.get(
         AppConstants.getHeadlines(country: "IN"),
       );
+
       if (response.statusCode == 200) {
         final data = response.data["articles"] as List;
 
@@ -38,6 +39,7 @@ class APIHelper {
       Response response = await _dio.get(
         AppConstants.searchNews(keyword: query),
       );
+
       if (response.statusCode == 200) {
         final data = response.data["articles"] as List;
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Screens/main_screen.dart';
 import 'package:newsapp/models/Providers/bookmark_provider.dart';
+import 'package:newsapp/models/Providers/filter_provider.dart';
 import 'package:newsapp/models/Providers/query_provider.dart';
 import 'package:newsapp/utils/shared_prefrences_handler.dart';
 import 'package:newsapp/utils/theme/theme_provider.dart';
@@ -36,12 +37,18 @@ class MyApp extends StatelessWidget {
             return QueryProvider();
           },
         ),
+        ChangeNotifierProvider<FilterProvider>(
+          create: (BuildContext context) {
+            return FilterProvider();
+          },
+        ),
       ],
       child: Consumer<ThemeProvider>(
         builder: (BuildContext context, value, Widget? child) {
           return ScreenUtilInit(
             builder: (BuildContext context, Widget? child) {
               return MaterialApp(
+                debugShowCheckedModeBanner: false,
                 title: 'News App',
                 theme: value.appThemeData,
                 home: child,

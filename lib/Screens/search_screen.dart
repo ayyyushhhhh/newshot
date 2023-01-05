@@ -22,14 +22,18 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
+
     queryProvider = Provider.of<QueryProvider>(context, listen: false);
   }
 
   @override
   void dispose() {
-    super.dispose();
-    queryProvider.sendQuery("");
+    if (queryController.text != "") {
+      queryProvider.sendQuery("");
+    }
+
     queryController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,7 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   enabledBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
-                  fillColor: Theme.of(context).primaryColor,
+                  fillColor: Theme.of(context).secondaryHeaderColor,
                   filled: true,
                   prefixIcon: const Icon(
                     Icons.search,

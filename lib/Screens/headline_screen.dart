@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Screens/search_screen.dart';
 import 'package:newsapp/utils/API%20helper/api_helper.dart';
 import 'package:newsapp/utils/API%20helper/error_handler.dart';
+import 'package:newsapp/widgets/bottom_modal.dart';
 import 'package:newsapp/widgets/drawer_container.dart';
 import 'package:newsapp/widgets/news_widget.dart';
+
 import '../models/news_model.dart';
 
 class HeadlineScreen extends StatefulWidget {
@@ -40,16 +42,32 @@ class _HeadlineScreenState extends State<HeadlineScreen>
               pinned: true,
               actions: [
                 IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return const SearchScreen();
-                      }));
-                    },
-                    icon: const Icon(
-                      Icons.search,
-                      color: Colors.blueAccent,
-                    )),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const BottomModal();
+                        });
+                  },
+                  icon: Icon(
+                    Icons.filter_alt,
+                    color: Colors.blueAccent,
+                    size: 40.r,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return const SearchScreen();
+                    }));
+                  },
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.blueAccent,
+                    size: 40.r,
+                  ),
+                ),
               ],
               title: Text(
                 "NewsShot",
@@ -80,6 +98,14 @@ class _HeadlineScreenState extends State<HeadlineScreen>
                   if (snapshot.hasError) {
                     final error = snapshot.error as DioError;
                     APIErrorHandler.fromDioError(error);
+                    SnackBar(
+                      content: Text(APIErrorHandler.message.toString()),
+                    );
+                    return const SliverToBoxAdapter(
+                      child: Center(
+                        child: Text("Something Went Wrong"),
+                      ),
+                    );
                   }
                   if (snapshot.hasData) {
                     List<NewsModel> newsData = snapshot.data as List<NewsModel>;
