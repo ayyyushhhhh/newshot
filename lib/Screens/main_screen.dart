@@ -26,8 +26,6 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (index) {
           setState(() {
             controller.jumpToPage(index);
-
-            /// Switching the PageView tabs
             setState(() {
               _currentIndex = index;
             });

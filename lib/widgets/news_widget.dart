@@ -18,7 +18,7 @@ class NewsContainer extends StatelessWidget {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
           return WebViewScreen(
-            url: newsModel.url.toString(),
+            newsModel: newsModel,
           );
         }));
       },
