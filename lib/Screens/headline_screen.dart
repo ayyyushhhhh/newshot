@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsapp/utils/API%20helper/dio_helper.dart';
+import 'package:newsapp/utils/API%20helper/api_helper.dart';
 import 'package:newsapp/utils/API%20helper/error_handler.dart';
 import 'package:newsapp/widgets/drawer_container.dart';
 import 'package:newsapp/widgets/news_widget.dart';
@@ -66,7 +66,6 @@ class _HeadlineScreenState extends State<HeadlineScreen>
                   if (snapshot.hasError) {
                     final error = snapshot.error as DioError;
                     APIErrorHandler.fromDioError(error);
-                    print(APIErrorHandler.message);
                   }
                   if (snapshot.hasData) {
                     List<NewsModel> newsData = snapshot.data as List<NewsModel>;

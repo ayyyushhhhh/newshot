@@ -36,7 +36,8 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.6.0
   intl: ^0.18.0
-  url_launcher: ^6.1.7
+  shared_preferences: ^2.0.15
+  webview_flutter: ^4.0.1
 
 dev_dependencies:
   

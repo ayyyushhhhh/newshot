@@ -137,7 +137,7 @@ class Source {
 
   factory Source.fromMap(Map<String, dynamic> map) {
     return Source(
-      id: map['id'] != null ? map['id'] as String : null.toString(),
+      id: map['id'] != null ? map['id'] as String : null,
       name: map['name'] as String,
     );
   }

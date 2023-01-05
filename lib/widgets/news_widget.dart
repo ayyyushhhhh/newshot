@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:newsapp/Screens/web_view_screen.dart';
 import 'package:newsapp/models/Providers/bookmark_provider.dart';
 import 'package:newsapp/models/news_model.dart';
-import 'package:newsapp/utils/utils.dart';
+
 import 'package:provider/provider.dart';
 
 class NewsContainer extends StatelessWidget {
@@ -14,7 +15,12 @@ class NewsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        Utils.openLinks(url: newsModel.url.toString());
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return WebViewScreen(
+            url: newsModel.url.toString(),
+          );
+        }));
       },
       child: Container(
         margin: EdgeInsets.all(10.r),

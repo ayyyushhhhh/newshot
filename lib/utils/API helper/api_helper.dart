@@ -15,12 +15,19 @@ class APIHelper {
         List<NewsModel> news = [];
 
         for (var newsData in data) {
-          news.add(NewsModel.fromMap(newsData));
+          NewsModel newsModel = NewsModel.fromMap(newsData);
+          if (newsModel.author != null &&
+              newsModel.content != null &&
+              newsModel.description != null &&
+              newsModel.title != null &&
+              newsModel.urlToImage != null) {
+            news.add(newsModel);
+          }
         }
         return news;
       }
 
-      throw [];
+      return [];
     } on DioError {
       rethrow;
     }
