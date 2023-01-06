@@ -4,6 +4,8 @@ NewsShot is a news aggregator that organizes and highlights what’s happening i
 NewsShot use NewsApi for fetching news. App allows user to bookmark their favourite news and save it locally. 
 
 ## UI
+![newsshhot](https://user-images.githubusercontent.com/65955486/211004101-c78d17c4-9fec-4e0e-b1b0-b2d0ca414907.png)
+
 [Check out this Video](https://drive.google.com/file/d/13Ye-bv3zLzgT7AnwDUQveZpCikQyDJuC/view?usp=share_link)
 
 
