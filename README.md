@@ -1,17 +1,22 @@
-# newsapp
 
-A new Flutter project.
+# NewsShot
 
-## Getting Started
+NewsShot is a news app based on flutter. NewsShot use NewsApi for fetching news. App allows user to bookmark their favourite news and save it locally. 
 
-This project is a starting point for a Flutter application.
+## UI
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# newshot
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file in your root folder. 
+
+add variable
+
+`API_KEY`
+
+add your own API_KEY from https://newsapi.org. 
+
+
+
