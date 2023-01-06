@@ -10,6 +10,7 @@ NewsShot use NewsApi for fetching news. App allows user to bookmark their favour
 ## Features 
 -Browse by tags
 You can now browse stories by tags — Policy, Economy, Startups, you name it. We’ve got you covered.
+
 -Bookmark 
 Bookmark your favourite articles to read whenever you have time. 
 
