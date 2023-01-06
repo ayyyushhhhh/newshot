@@ -21,11 +21,6 @@ class _HeadlineScreenState extends State<HeadlineScreen>
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     return SafeArea(

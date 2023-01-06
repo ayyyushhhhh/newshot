@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:newsapp/models/news_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,12 +25,12 @@ class SharedPrefencesHandler {
       return bookMarks;
     }
 
-    // for (String boookmarkmap in bookMarksMap) {
-    //   print(jsonDecode(boookmarkmap));
-    //   // bookMarks.add(
-    //   //   NewsModel.fromMap(jsonDecode(boookmarkmap) as Map<String, dynamic>),
-    //   // );
-    // }
+    for (String boookmarkmap in bookMarksMap) {
+      bookMarks.add(
+        NewsModel.fromMap(
+            jsonDecode(jsonDecode(boookmarkmap)) as Map<String, dynamic>),
+      );
+    }
     return bookMarks;
   }
 }
