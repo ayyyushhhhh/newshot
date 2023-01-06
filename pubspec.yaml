@@ -41,7 +41,8 @@ dependencies:
   share_plus: ^6.3.0
   cached_network_image: ^3.2.3
   flutter_native_splash: ^2.2.16
-
+  flutter_dotenv: ^5.0.2
+   
 
 
 dev_dependencies:
@@ -60,6 +61,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    - .env
     - assets/images/cup.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

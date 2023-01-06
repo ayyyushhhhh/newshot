@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Screens/main_screen.dart';
 import 'package:newsapp/models/Providers/bookmark_provider.dart';
@@ -8,9 +9,10 @@ import 'package:newsapp/utils/shared_prefrences_handler.dart';
 import 'package:newsapp/utils/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPrefencesHandler.init();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

@@ -1,5 +1,7 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class AppConstants {
-  static const String _apiKey = "255c7aa01c8341c0aa08eb7076540a38";
+  static final String _apiKey = dotenv.env['API_KEY']!;
   static String searchNews({required String keyword}) {
     return "https://newsapi.org/v2/everything?q=$keyword&apiKey=$_apiKey";
   }
