@@ -18,17 +18,20 @@ class SharedPrefencesHandler {
     await preferences?.setStringList("bookmarks", bookMarks);
   }
 
-  static getBookMarks() {
+  static List<NewsModel> getBookMarks() {
     List<NewsModel> bookMarks = [];
     final bookMarksMap = preferences!.getStringList("bookmarks");
 
     if (bookMarksMap == null) {
       return bookMarks;
     }
-    for (var boookmarkmap in bookMarksMap) {
-      bookMarks.add(
-          NewsModel.fromMap(jsonDecode(boookmarkmap) as Map<String, dynamic>));
-    }
+
+    // for (String boookmarkmap in bookMarksMap) {
+    //   print(jsonDecode(boookmarkmap));
+    //   // bookMarks.add(
+    //   //   NewsModel.fromMap(jsonDecode(boookmarkmap) as Map<String, dynamic>),
+    //   // );
+    // }
     return bookMarks;
   }
 }

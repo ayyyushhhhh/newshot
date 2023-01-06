@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Screens/search_screen.dart';
@@ -20,6 +21,11 @@ class _HeadlineScreenState extends State<HeadlineScreen>
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return SafeArea(
@@ -28,6 +34,9 @@ class _HeadlineScreenState extends State<HeadlineScreen>
         backgroundColor: Theme.of(context).primaryColor,
         drawer: const DrawerContainer(),
         body: CustomScrollView(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           slivers: [
             SliverAppBar(
               backgroundColor: Theme.of(context).primaryColor,
@@ -76,6 +85,15 @@ class _HeadlineScreenState extends State<HeadlineScreen>
                   size: 40.r,
                 ),
               ),
+            ),
+            Consumer<FilterProvider>(
+              builder: (BuildContext context, value, Widget? child) {
+                return CupertinoSliverRefreshControl(
+                  onRefresh: () async {
+                    value.changeFilter(value.filter);
+                  },
+                );
+              },
             ),
             Consumer<FilterProvider>(
               builder: (BuildContext context, value, Widget? child) {
