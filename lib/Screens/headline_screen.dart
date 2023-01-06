@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Screens/search_screen.dart';
 import 'package:newsapp/models/Providers/filter_provider.dart';
+import 'package:newsapp/utils/API%20helper/api_helper.dart';
 import 'package:newsapp/widgets/bottom_modal.dart';
 import 'package:newsapp/widgets/drawer_container.dart';
 import 'package:newsapp/widgets/all_news_future_widget.dart';
@@ -19,6 +20,15 @@ class HeadlineScreen extends StatefulWidget {
 class _HeadlineScreenState extends State<HeadlineScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+
+  late APIHelper apiHelper;
+
+  @override
+  void initState() {
+    super.initState();
+    apiHelper = Provider.of<APIHelper>(context, listen: false);
+    apiHelper.checkConnectivity();
+  }
 
   @override
   Widget build(BuildContext context) {

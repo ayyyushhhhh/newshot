@@ -4,14 +4,16 @@ import 'package:newsapp/models/news_model.dart';
 import 'package:newsapp/utils/API%20helper/api_helper.dart';
 import 'package:newsapp/utils/API%20helper/error_handler.dart';
 import 'package:newsapp/widgets/news_widget.dart';
+import 'package:provider/provider.dart';
 
 class AllNewsFutureBuilder extends StatelessWidget {
   const AllNewsFutureBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final apiHelper = Provider.of<APIHelper>(context, listen: false);
     return FutureBuilder<List<NewsModel>>(
-      future: APIHelper().fetchHeadlines(),
+      future: apiHelper.fetchHeadlines(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SliverToBoxAdapter(

@@ -1,9 +1,24 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:newsapp/models/news_model.dart';
+import 'package:newsapp/utils/API%20helper/dio_connectivity_request_retrier.dart';
+import 'package:newsapp/utils/API%20helper/retry_interceptor.dart';
 import 'package:newsapp/utils/app_constants.dart';
 
 class APIHelper {
   final Dio _dio = Dio();
+
+  void checkConnectivity() {
+    _dio.interceptors.add(
+      RetryOnConnectionChangeInterceptor(
+        requestRetrier: DioConnectivityRequestRetrier(
+          dio: _dio,
+          connectivity: Connectivity(),
+        ),
+      ),
+    );
+  }
+
   Future<List<NewsModel>> fetchHeadlines() async {
     try {
       Response response = await _dio.get(

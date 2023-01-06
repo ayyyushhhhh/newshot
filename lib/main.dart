@@ -5,6 +5,7 @@ import 'package:newsapp/Screens/main_screen.dart';
 import 'package:newsapp/models/Providers/bookmark_provider.dart';
 import 'package:newsapp/models/Providers/filter_provider.dart';
 import 'package:newsapp/models/Providers/query_provider.dart';
+import 'package:newsapp/utils/API%20helper/api_helper.dart';
 import 'package:newsapp/utils/shared_prefrences_handler.dart';
 import 'package:newsapp/utils/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +45,11 @@ class MyApp extends StatelessWidget {
             return FilterProvider();
           },
         ),
+        Provider<APIHelper>(
+          create: (BuildContext context) {
+            return APIHelper();
+          },
+        )
       ],
       child: Consumer<ThemeProvider>(
         builder: (BuildContext context, value, Widget? child) {
